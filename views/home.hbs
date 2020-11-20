@@ -1,8 +1,20 @@
-<ul >
-  {{#events}}
-    <li>
-        <h2>{{ title }}</h2>
-        <p>{{ description }}</p>
-    </li>
-  {{/events}}
-</ul>
+<table class="shadow table table-striped rounded table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Like</th>
+      <th scope="col">Dislike</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#events}}
+    <tr>
+      <th scope="row">{{ title }}</th>
+      <td>{{ description }}</td>
+      <td>{{ like }}</td>
+      <td>{{ dislike }}</td>
+    </tr>
+     {{/events}}
+  </tbody>
+</table>

@@ -3,23 +3,64 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Team [TEAM NAME] Website</title>
+  <title>Team [Group 3] Website</title>
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <!-- CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+
 </head>
 <body>
+    <div class="container">
   <div>
-      <h1>Welcome to [TEAM NAME'S] application</h1>
+      <h4>Welcome to [Group 3] application</h4>
+      <br>
+      <br>
     {{{body}}}
 </div>
-<div>
-  <h2>Add an event</h2>
-    <form action="/event" method="post">
-       title: <input name="title" type="text" /> <br />
-       description: <input name="description" type="text" /> <br />
-       <br />
-        <input type="submit" name="submit" value="submit" />
-    </form>
+
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEvent">
+  Create Event
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="addEvent" tabindex="-1" aria-labelledby="addEventLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+           
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Event</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/event" method="post">
+  <div class="form-group">
+    <label for="titleValue">Title</label>
+    <input type="text"  name="title" class="form-control" aria-describedby="titleHelp" id="titleValue">
+    <small id="titleHelp" class="form-text text-muted">Enter the event title</small>
   </div>
+  <div class="form-group">
+    <label for="descriptionText">Descripton</label>
+    <input type="text" name="description" class="form-control" id="descriptionText">
+  </div>
+  <button type="submit" name="submit" value="submit" class="btn btn-primary">Save</button>
+</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+      
+    </div>
+  </div>
+</div>
+</div>
+  <!-- jQuery and JS bundle w/ Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </body>
 </html>
