@@ -2,13 +2,13 @@
 // TODO: look for all instances of [] and replace all instances of 
 //       the 'variables' with actual values 
 // variables:
-//      [GITREPO]
-//      [PROJECTID]
-//      [CLUSTER_NAME] 
-//      [ZONE]
+//      https://github.com/abanipatraaws/git-external
+//      roidtcnov313
+//      gcp-cluster-abani 
+//      us-central1-c
 //      the following values can be found in the yaml:
-//      [DEPLOYMENT_NAME]
-//      [CONTAINER_NAME] (in the template/spec section of the deployment)
+//      demo-ui
+//      demo-ui (in the template/spec section of the deployment)
 
 pipeline {
     agent any 
@@ -16,8 +16,8 @@ pipeline {
         stage('Stage 1') {
             steps {
                 echo 'Retrieving source from github' 
-                git branch: 'master',
-                    url: '[GITREPO]'
+                git branch: 'main',
+                    url: 'https://github.com/abanipatraaws/git-external'
                 echo 'Did we get the source?' 
                 sh 'ls -a'
             }
@@ -35,7 +35,7 @@ pipeline {
         }        
          stage('Stage 3') {
             environment {
-                PORT = 8081
+                PORT = 8080
             }
             steps {
                 echo 'install dependencies' 
@@ -49,16 +49,16 @@ pipeline {
             steps {
                 echo "build id = ${env.BUILD_ID}"
                 echo 'Tests passed on to build Docker container'
-                sh "gcloud builds submit -t gcr.io/[PROJECTID]/internal:v2.${env.BUILD_ID} ."
+                sh "gcloud builds submit -t gcr.io/roidtcnov313/external-image:v2.${env.BUILD_ID} ."
             }
         }        
          stage('Stage 5') {
             steps {
                 echo 'Get cluster credentials'
-                sh 'gcloud container clusters get-credentials [CLUSTER_NAME] --zone [ZONE] --project [PROJECTID]'
+                sh 'gcloud container clusters get-credentials gcp-cluster-abani --zone us-central1-c --project roidtcnov313'
                 echo 'Update the image'
-                echo "gcr.io/[PROJECTID]/internal:2.${env.BUILD_ID}"
-                sh "kubectl set image deployment/[DEPLOYMENT_NAME] [CONTAINER_NAME]=gcr.io/[PROJECTID]/internal:v2.${env.BUILD_ID} --record"
+                echo "gcr.io/roidtcnov313/external-image:2.${env.BUILD_ID}"
+                sh "kubectl set image deployment/demo-ui demo-ui=gcr.io/roidtcnov313/external-image:v2.${env.BUILD_ID} --record"
             }
         }        
                
